@@ -6,7 +6,7 @@ import { TextInput } from "./ui/TextInput";
 export const SearchFunction = ({ clickFn }) => {
   const [searchField, setSearchField] = useState("");
 
-  const matchedDrinks = data.filter((item) => {
+  const matchedRecipes = data.hits.recipe.filter((item) => {
     return item.label.toLowerCase().includes(searchField.toLowerCase());
   });
 
@@ -16,9 +16,9 @@ export const SearchFunction = ({ clickFn }) => {
 
   return (
     <>
-      <label>Search for drinks:</label>
-      <TextInput onChange={handleChange} w={200} mb={8} />
-      <PortfolioPage clickFn={clickFn} items={matchedDrinks} />
+      <label>Search for recipes:</label>
+      <TextInput changeFn={handleChange} w={200} mb={8} />
+      <PortfolioPage clickFn={clickFn} items={matchedRecipes} />
     </>
   );
 };
