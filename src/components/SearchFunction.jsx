@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { data } from "../utils/data";
+//import { data } from "../utils/data";
 import { PortfolioPage } from "../pages/PortfolioPage";
 import { TextInput } from "./ui/TextInput";
+import { VStack, Text } from "@chakra-ui/react";
 
-export const SearchFunction = ({ clickFn }) => {
+export const SearchFunction = ({ items, clickFn }) => {
   const [searchField, setSearchField] = useState("");
 
-  const matchedRecipes = data.hits.recipe.filter((item) => {
-    return item.label.toLowerCase().includes(searchField.toLowerCase());
+  const matchedRecipes = items.filter((recipe) => {
+    return recipe.recipe.label
+      .toLowerCase()
+      .includes(searchField.toLowerCase());
   });
 
   const handleChange = (event) => {
@@ -15,10 +18,12 @@ export const SearchFunction = ({ clickFn }) => {
   };
 
   return (
-    <>
-      <label>Search for recipes:</label>
-      <TextInput changeFn={handleChange} w={200} mb={8} />
+    <VStack>
+      <Text color={"white"} fontWeight={"bold"} fontSize={"3xl"}>
+        Winc Recipe Checker
+      </Text>
+      <TextInput onChange={handleChange} w={500} mb={8} />
       <PortfolioPage clickFn={clickFn} items={matchedRecipes} />
-    </>
+    </VStack>
   );
 };
